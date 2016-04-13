@@ -1,0 +1,24 @@
+git config [--global] user.name 'Fred'
+git config [--global] user.email '634838874@qq.com'
+
+git init `FileName`
+
+git add `FileName`
+
+git commit -m 'something'
+
+git status	//查看状态
+
+git diff `FileName`	//查看文件修改内容
+
+git rm `FileName`	//通过git删除文件，并且自动git add此次修改（delete）
+
+git checkout -- `FileName`	//撤销（删除）工作区的修改（回退到git add或git commit之前的状态），修改包括删除操作（文件或内容）
+
+git reset HEAD `FileName`	//从暂存区回退到工作区（回退到git add之前的状态）,也就是撤销上一次git add操作
+
+git reset --hard `version`	//版本回退，version为具体版本号；HEAD（关键字？）表示当前版本（当前工作的版本，非上一次commit）；HEAD^表示上一次commit版本；HEAD^^表示上上一次版本；以此类推
+
+git log [--pretty=oneline]		//查看commit记录历史
+
+git reflog	//查看命令记录

@@ -1,0 +1,56 @@
+
+Git目录分析
+
+.git
+#	<file>
+	- HEAD			#保存HEAD指针当前指向的分支；e.g.：refs/heads/master; refs/heads/dev
+	- FETCH_HEAD	#
+	- ORIG_HEAD		#
+	- config		#本地git仓库配置文件
+
+
+#	<directory>
+	- hooks			#预设的“钩子函数”？啥东东！某语言写的代码（函数？）
+
+	- logs
+		- HEAD 		#git版本跟踪记录；git reflog命令结果来源
+		- refs
+			- heads		#本地仓库
+				- master		#master分支版本跟踪记录； git log命令结果来源
+				- dev			#dev分支版本跟踪记录； git log命令结果来源
+				- ...
+			- remotes	#远程仓库
+				- origin 	#别名为origin的远程仓库
+					- master 	#分支跟踪记录
+					- dev
+					- ...
+				- alias 	#别名为alias的远程仓库
+					- master
+					- ...
+				- ...
+
+	- objects		#git对象，还四种？
+		- info
+		- pack
+
+	- branches
+
+	- description
+
+	- info			#对.gitignore功能的补充（网上说的）
+
+	- refs
+		- heads
+			- master	#分支master的当前版本号
+			- dev		#分支dev的当前版本号
+			- ...
+		- tags
+		-remotes
+			- origin	#别名为origin的远程仓库
+				- master 	#origin远程库的master分支的当前版本号
+				- dev 		#origin远程库的dev分支的当前版本号
+				- ...
+			- alias 	#别名为alias的远程仓库
+				- master 	#alias远程库的master分支的当前版本号
+				- ..
+			- ...

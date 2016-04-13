@@ -1,0 +1,26 @@
+#
+#Format
+#
+#配置文件格式、字段释义
+#
+#Host Alias					#主机别名（用于替换SSH连接时的地址部分——下面Hostname字段，e.g.: ssh -vT Alias）
+#	User username			#登录SSH服务器的用户名，如果没有，则以客户端系统当前登录用户尝试登录SSH服务器
+#	Hostname Domain name or IP address		#Host字段即为此处的别名
+#	PreferredAuthentications publickey		#首选认证方式
+#	IdentityFile	ALocalFileAddress		#私钥文件相对（当前命令运行时所在地址）地址或者绝对地址（最好使用绝对地址）
+#
+
+Host github.com
+	User git
+	Hostname github.com
+	PreferredAuthentications publickey
+#Windows地址格式	
+	IdentityFile C:/Users/fxylee/.ssh/github_rsa
+#*NIX地址格式
+#	IdentityFile ~/.ssh/github_rsa
+	
+Host git.oschina.net
+	User git
+	Hostname git.oschina.net
+	PreferredAuthentications publickey
+	IdentityFile C:/Users/fxylee/.ssh/oschina_rsa
