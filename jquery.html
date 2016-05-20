@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <div id="demo">
+        demo html
+    </div>
+
+    <script type="text/javascript">
+
+
+        (function(){
+
+            'use strict';
+
+
+            function jQuery(selector){
+                return document.getElementById(selector);
+            }
+
+
+            /**
+             * Prototype chain
+             *
+             * HTMLDivElement -> HTMLElement -> Element -> Node -> EventTarget -> Object -> Null
+             *
+             */
+
+            var div = new jQuery('demo');
+
+//            console.log(div.constructor);//function HTMLDivElement(){}
+//            console.log(div.constructor.prototype);//HTMLElement
+//            console.log(div.constructor.prototype.constructor);//function HTMLDivElement(){}
+//
+//            console.log(HTMLElement.prototype);//Element
+//            console.log(typeof HTMLElement);
+//
+//
+//            for(var key in div){
+//                if(div.constructor.prototype.hasOwnProperty(key)){
+//                    console.log(key);
+//                }
+//            }
+
+            var $ = function(){
+                return new $.fn.init();
+            }
+
+            $.fn = {
+                init : function(){
+                    return this;
+                },
+                app : function(){
+                    console.log('abc');
+                }
+            }
+
+            $.fn.init.prototype = $.fn;
+        })();
+
+    </script>
+</body>
+</html>

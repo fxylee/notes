@@ -1,0 +1,38 @@
+JavaScript六大数据类型（typeof计算结果）：
+原始类型：（存储在栈stack，变量存储真实的值）
+	1、undefined
+	2、null（typeof返回object）
+	3、boolean
+	4、number
+	5、string
+引用类型：（存储在堆heap，变量存储的是“值”的地址引用 —— 指针）
+	object
+
+函数是对象
+
+Object/Function/Array/String
+
+
+JavaScript对象分类：
+1、本地对象
+	1、Object
+	2、Function
+	3、Array
+	4、String
+	5、Boolean
+	6、Number
+	7、Date
+	8、RegExp
+	9、Error
+	10、EvalError
+	11、RangeError
+	12、ReferenceError
+	13、SyntaxError
+	14、TypeError
+	15、URIError
+2、内置对象
+	1、Global对象 —— 依据不同的ECMAScript实现环境，指定不同的对象作为Global对象，并且该对象必须实现了ECMASCript定义的全局方法（e.g.:decodeURI、eval）和全局属性（e.g.:Infinity、NaN）。浏览器（实现环境），指定了window对象作为Global对象。（有说：浏览器全局对象定义了window属性，而window属性指向全局对象本身）
+	2、Math对象
+3、宿主对象
+	1、Bom对象
+	2、Dom对象

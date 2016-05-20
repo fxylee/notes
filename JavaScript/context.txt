@@ -1,0 +1,41 @@
+/**
+ * 上下文环境 —— context（上下文是可以改变的）
+ * 定义时上下文、执行是上下文
+ */
+
+
+function CustomConstructor(){
+
+	/**
+	 * 定义一个函数内部变量，仅仅指内部变量，非私有属性（为什么以前会这么想呢。。。）
+	 */
+	var funVariable = null;
+
+	/**
+	 * this默认全局对象（依据执行上下文而定）
+	 * 将CustomConstructor当做构造函数时，this指向它的对象实例
+	 * 
+	 * ECMAScipt只有公有属性
+	 */
+	this.publicPrototype = null;
+
+	/**
+	 * 
+	 */
+	this.referenceArray = new Array();
+	this.referenceObject = new Object();
+	
+}
+
+/**
+ * 用前后下划线（_）标识该属性为私有的，但实际依然是（公共）属性
+ */
+CustomConstructor._privatePrototype_ = null;
+
+/**
+ * CustomConstructor作为构造函数，staticPublicProtype相当于“类”CustomConstructor的公共静态属性
+ * 实际上，staticPublicPrototype只是对象CustomConstructor的一个（公共）属性
+ * 函数即对象！！！！！
+ */
+CustomConstructor.staticPublicPrototype = null;
+

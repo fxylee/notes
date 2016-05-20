@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        /**
+         * 完整的文档包括：
+         * 1、DOM内容 —— HTML内容；
+         * 2、内嵌资源（styleSheet、script、frames、images、Multi-Media等）
+         *
+         * 加载步骤：
+         * 第一步：打开浏览器，初始化当前页面的document对象；document.readyState = 'loading'
+         * 第二步：客户端发送web请求；document.readyState = 'loading'
+         * 第三步：服务器返回text/html文件数据流；document.readyState = 'loading'
+         * 第四步：浏览器接收html文件数据流，并解析和渲染（使用内联样式和浏览器自定义样式）接收到的html数据流；document.readyState = 'loading'
+         *        若html文件所有数据流已经接收并解析渲染完成，设定document.readyState = 'interactive'，并先触发document.readystatechange事件，再触发DOMContentLoaded事件
+         *        若解析过程中，遇到内嵌资源标记，浏览器发送获取内嵌资源的请求，对于script资源，使用同步阻塞请求（下载js文件时，停止解析html，知道js下载且执行完），其他资源使用并行请求
+         *        若解析过程中，内嵌的某个styleSheet完成加载，浏览器使用内联样式、内嵌styleSheet、浏览器自定义样式重新渲染页面
+         *        若解析过程中，内嵌的script文件完成加载，浏览器立即执行该script，若script中操作了DOM，则浏览器又需要重新排版页面和渲染页面
+         *        若解析过程中，遇到image或其他媒体资源，浏览器使用图像占位符渲染页面，占位符大小依据该image或媒体内容大小而定，若image或媒体未定义大小，浏览器使用默认值排版和渲染该image或媒体样式
+         *        若解析过程中，image或者媒体资源加载完成，浏览器显示该image和媒体资源，并且依据image和媒体大小重新排版和渲染页面
+         *        （浏览器是边下载html文件，边显示html文件。这也就是经常看到页面显示一半并且正在加载的原因）
+         * 第六步：浏览器解析完成html内容，且加载完内嵌资源，并页面元素渲染完成，设定document.readyState = 'complete' || 'loaded'，并触发document.readystatechange事件
+         *
+         * 加载优化：
+         * 1、页面减肥（文件压缩、去注释、去空白、去内联等）
+         * 2、减少内嵌资源链接数：（合并文件、合并小图标等）
+         * 3、减少域名解析，即外部链接最好使用IP地址链接
+         * 4、资源缓存
+         * 5、
+         */
+//        console.log(document.documentElement);debugger;
+        document.onreadystatechange = function(){
+            console.log(document.readyState);
+            if(document.readyState == 'loading'){
+                //正在加载
+//                debugger;
+                console.log(document.documentElement);
+                //此时存在document对象，且已初始化，但document.body不存在
+            } else if(document.readyState == 'interactive'){
+                //文档渲染完成、正在加载内嵌资源
+//                debugger;
+                document.body.innerHTML = '<p>interactive</p>';
+            } else  if(document.readyState == 'complete'){
+                //文档加载完成
+//                debugger;
+                document.body.innerHTML = '<p>complete</p>';
+                document.clear();
+            } else {
+                console.log('Gave over!');
+            }
+        };
+        document.addEventListener("DOMContentLoaded", function(event) {
+            console.log("DOM fully loaded and parsed");
+        });debugger;
+        document.onDOMContentLoaded = function(){
+            console.log('abc');
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Document (On)ReadyState</h1>
+
+</body>
+</html>

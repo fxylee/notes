@@ -1,0 +1,63 @@
+前端框架概览：
+
+/*******************/
+底层框架
+
+jQuery
+适用PC端
+
+ZeptoJS
+类似jQuery的现代浏览器轻量级框架，主要针对webkit内核浏览器，IE9+
+
+prototype.js
+Sam Stephenson写的一个非常优雅的javascript基础类库，对javascript做了大量的扩展，而且很好的支持Ajax
+擦，国内少的可怜，竟然找不到中文文档
+
+AngularJS
+前端框架，貌似很牛逼的样子，我是说比jQuery还牛逼。
+谷歌人开发，2012年发布
+ng-model 定义数据源
+ng-bind 定义数据显示的地方（绑定数据）
+ng-controller 还不知道
+
+/******************/
+UI框架
+
+jQuery mobile
+基于jQuery，适用移动端
+
+jQuery EasyUI
+基于jQuery
+
+Bootstrap
+前端UI框架、Twitter人开发
+
+ionic
+基于AngularJS的H5移动端轻量级框架，UI库，主要面向webkit内核的浏览器
+
+extjs
+貌似很牛的样子，但没找到文档。唉~
+
+
+
+/*****************/
+架构类框架
+
+RequireJS
+轻量级前端模块化载入框架，采用AMD规范。
+
+
+/*****************/
+其他
+
+SASs
+基于ruby的服务器端CSS编程脚本，.sass文件会被编译为正常的css文件引入到网页
+
+Less
+基于JS的客户端CSS编程框架，网页需引入less库和less写的CSS文件，浏览器解析通过less库，解析less文件为css代码，然后写入网页进行渲染
+
+
+Nitobi团队开发了phonegap，后该团队被Adobe收购，phonegap被团队改名为Apache Cordova。后Adobe把phonegap送给Apache基金会，Apache改名phonegap为cordova，同事phonegap保留。
+Apache Cordova是从PhoneGap中抽出的核心代码，是驱动PhoneGap的核心引擎
+
+Phonegap Build是一个在线打包工具，是iPhone, Android SDK service和cordova（Apache Cordova）的合体
