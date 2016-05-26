@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body{
+            background: #000;
+        }
+        .wrap{
+            /*overflow: hidden;*/
+            margin: 0 auto;
+            width: 80%;
+            background: #00AA88;
+        }
+
+        #instance{
+            display: block;
+            overflow: auto;
+            margin: 50px;
+            padding: 40px;
+            width: 300px;
+            height: 300px;
+            border: 10px solid #CCC;
+            background: #5E7FA0;
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center;color: #fff;">
+    <h1>获取元素的实际尺寸</h1>
+</div>
+<div class="wrap">
+    <span>inner</span>
+    <div id="instance" style="">
+        <p id="content" style="white-space:nowrap;">This is content.This is content.This is content.This is content.</p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+    <span>inner</span>
+</div>
+<div style="color: #fff;">
+    <h2>Result:</h2>
+    <ul>
+        <li>(CSS)width 含滚动条宽度(15px)</li>
+        <li>(CSS)height 含滚动条高度(15px)</li>
+        <li></li>
+        <li>dom.style 仅仅可获取内嵌样式的值</li>
+        <li>e.g.</li>
+        <li>dom.style.width 仅仅可获取内嵌CSS定义的width</li>
+        <li>dom.style.height 仅仅可获取内嵌CSS定义的height</li>
+        <li></li>
+        <li>offsetWidth = margin + border + padding + (CSS)width</li>
+        <li>offsetHeight = margin + border + padding + (CSS)height</li>
+        <li></li>
+        <li>clientWidth = margin + padding + ((CSS)width - 滚动条宽度)</li>
+        <li>clientHeight = margin + padding + ((CSS)height - 滚动条高度)</li>
+        <li></li>
+        <li>scrollWidth = padding(left) + 里面内容的宽度（实际宽度？）</li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var dom = document.getElementById('instance');
+    var content = document.getElementById('content');
+    console.log('instance');
+    console.log('' + dom.offsetWidth + ' * ' + dom.offsetHeight)
+    console.log(dom.clientWidth + ' * ' + dom.clientHeight);
+    console.log(dom.style.margin);
+    console.log(dom.scrollWidth);
+    console.log(content.scrollWidth);
+    dom.onscroll = function(){
+        console.log(dom.scrollLeft);
+    }
+</script>
+</body>
+</html>

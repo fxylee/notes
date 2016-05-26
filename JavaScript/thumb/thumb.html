@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+    <title></title>
+</head>
+<style type="text/css">
+    ul,li{
+        display: block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    ul{ overflow: hidden;}
+    li{
+        float: left;
+        width: 33%;
+    }
+    img{
+        width: 100%;
+    }
+</style>
+<body style="text-align: center;">
+
+<h1>缩略图格式化</h1>
+<p>等比例缩放且填充容器</p>
+
+<div style=" margin: 50px auto; padding: 50px; width: 80%; background: #00AA88;">
+    <ul>
+        <li><a href="http://www.baidu.com/" target="_blank" class="thumb"><img src="http://www.benbenla.cn/images/20120330/benbenla-04b.jpg" /></a></li>
+        <li><a href="#" class="thumb"><img src="http://imgstore.cdn.sogou.com/app/a/11220002/4348_pc.jpg" /></a></li>
+        <li><a href="#" class="thumb"><img src="http://www.deskcar.com/desktop/cartoon/china/2012317210314/17.jpg" style="width: 100px;" /></a></li>
+        <li><a href="#" class="thumb"><img src="http://pic1.ooopic.com/uploadfilepic/sheying/2009-01-04/OOOPIC_z19870212_20090104b18ef5b046904933.jpg" /></a></li>
+        <li><a href="#" class="thumb"><img src="http://5.26923.com/download/pic/000/245/718dfc8322abe39627591e4a495767af.jpg" /></a></li>
+        <li><a href="#" class="thumb"><img src="http://img3.imgtn.bdimg.com/it/u=67352308,2479390457&fm=21&gp=0.jpg" /></a></li>
+        <li><a href="#" class="thumb"><img src="http://rescdn.qqmail.com/dyimg/20140409/72B8663B7F23.jpg" /></a></li>
+        <li><a href="#" class="thumb"><img src="http://img1.imgtn.bdimg.com/it/u=3602991495,3673804&fm=21&gp=0.jpg" /></a></li>
+    </ul>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    (function($){
+        'use strict';
+
+        /**
+         * 格式化缩略图
+         * 填充满容器，等比例缩放，左右、上下偏移均等
+         *
+         * 1、获取图片，并初始化缩略图容器参数
+         * 2、缓存图片，替换原图片为loading图片
+         * 3、下载图片，获取图片原始尺寸
+         * 4、依据计划尺寸比例计算原始图片显示尺寸
+         * 5、替换loading图片为原始图片
+         *
+         * todo:
+         * 1、图片加载错误时，处理办法
+         * 2、点击图片事件，默认当前窗口预览原始图片
+         * 3、图片加载完成显示时，可以加动画
+         * 4、options给定的width/height为百分比的处理办法
+         * 5、预加载loading图片
+         */
+
+        var defaults = {
+            width: '300px',
+            height: '200px',
+            loading: './loading.gif'
+        };
+        var options = {};
+
+        /**
+         * 生成loading图片DOM
+         *
+         * @return {*} Image DOM
+         */
+        function Loading(){
+            var image = document.createElement('img');
+                image.src = options.loading;
+                image.style.width = '16px';
+                image.style.height = '16px';
+
+                image.style.position = 'absolute';
+                image.style.left = '50%';
+                image.style.top = '50%';
+                image.style.marginTop = '-8px';
+                image.style.marginLeft = '-8px';
+
+            return image;
+        }
+
+        /**
+         * 图片成功加载后依据options的width/height比例计算图片实际尺寸和位置偏移量
+         * @param image Image DOM
+         * @returns {*} Image DOM
+         */
+        function initImage(image){
+            image.style.position = 'absolute';
+            image.style.border = 'none';
+
+            var targetRatio = parseInt(options.width) / parseInt(options.height);
+            var imageRatio = image.width /image.height;
+
+            console.log('%o图片原始尺寸：' + image.width + ' * ' + image.height, image);
+            if(imageRatio > targetRatio){
+                //宽图
+                var width = image.width / (image.height / parseInt(options.height));
+                console.log('图片实际宽度：' + width + ' * ' + parseInt(options.height));
+
+                image.style.width = 'auto';
+                image.style.height = options.height;
+                image.style.left = '-' + (width - parseInt(options.width)) / 2 + 'px';
+                image.style.top = '0px';
+
+            } else if(imageRatio <= targetRatio){
+                //长图
+                var height = image.height / (image.width / parseInt(options.width));
+                console.log('图片实际尺寸：' + parseInt(options.width) + ' * ' + height);
+
+                image.style.width = options.width;
+                image.style.height = 'auto';
+                image.style.left = '0px';
+                image.style.top = '-' + (height - parseInt(options.height)) / 2 + 'px';
+            } else {
+                console.log('unKnown');
+            }
+
+            return image;
+        }
+
+        /**
+         * 缩略图处理主函数
+         * @param thumb
+         */
+        function thumb(thumb){
+            //初始化图片容器
+            thumb.style.display = 'block';
+            thumb.style.position = 'relative';
+            thumb.style.overflow = 'hidden';
+            thumb.style.width = options.width;
+            thumb.style.height = options.height;
+
+            var children = thumb.childNodes,
+                child = children.item(0);
+            //遍历查找图片子元素
+            while(child){
+                if(child.nodeType === 1 && child.nodeName.toLowerCase() == 'img'){
+                    var image = child;
+
+                    if(image.complete !== true){
+                        var loading = new Loading();
+
+                        thumb.removeChild(image);
+                        thumb.appendChild(loading);
+
+                        image.onload = function(){
+                            thumb.removeChild(loading);
+                            loading = null;
+
+                            thumb.appendChild(initImage(image));
+                        };
+
+                        image.onerror = function(){
+                            thumb.removeChild(loading);
+                            loading = null;
+
+                            thumb.appendChild(image);
+                        }
+                    } else if(image.complete === true){
+                        console.log('Cache');
+                        initImage(image);
+                    } else {
+                        console.log('complete不可能有其他值！');
+                    }
+
+                    image.onclick = function(){
+//                        alert(this.src);
+                        return false;
+                    }
+                }
+
+                child = child.nextSibling;
+            }
+        }
+
+        $(document).ready(function(){
+            options = $.extend(true, {}, defaults);
+            $('.thumb').each(function(index, dom){
+                thumb(dom);
+            })
+        });
+    })($);
+</script>
+</html>
